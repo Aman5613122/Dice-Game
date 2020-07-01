@@ -1,25 +1,58 @@
-var ran1 = Math.floor(Math.random() * 6) + 1;
+var count = document.querySelectorAll(".disk").length;
 
-var p1 = "/img/dice" + ran1 + ".png";
+for (var i = 0; i < count; i++) {
+  document.querySelectorAll(".disk")[i].addEventListener("click", function () {
+    sound(this.innerHTML);
+    buttonanime(this.innerHTML);
+  });
+}
 
-var image1 = document.querySelectorAll("img")[0].setAttribute("src", p1);
+document.addEventListener("keypress", function (eve) {
+  sound(eve.key);
+  buttonanime(eve.key);
+});
 
-var ran2 = Math.floor(Math.random() * 6) + 1;
+function sound(exp) {
+  switch (exp) {
+    case "w":
+      var audio = new Audio("/sound/tom1.mp3").play();
+      break;
 
-var p2 = "/img/dice" + ran2 + ".png";
+    case "a":
+      var audio = new Audio("/sound/tom2.mp3").play();
+      break;
 
-var image2 = document.querySelectorAll("img")[1].setAttribute("src", p2);
+    case "s":
+      var audio = new Audio("/sound/tom3.mp3").play();
+      break;
 
-if (ran1 > ran2) {
-  window.onload = function () {
-    alert("Player 1 win");
-  };
-} else if (ran2 > ran1) {
-  window.onload = function () {
-    alert("Player 2 win");
-  };
-} else {
-  window.onload = function () {
-    alert("Its a TIE");
-  };
+    case "d":
+      var audio = new Audio("/sound/tom4.mp3").play();
+      break;
+
+    case "j":
+      var audio = new Audio("/sound/kickbass.mp3").play();
+      break;
+
+    case "k":
+      var audio = new Audio("/sound/snare.mp3").play();
+      break;
+
+    case "l":
+      var audio = new Audio("/sound/crash.mp3").play();
+      break;
+
+    default:
+      alert("Press the wrong button");
+  }
+}
+
+function buttonanime(anim) {
+  anim = "." + anim;
+  var result = document.querySelector(anim);
+  result.classList.add("set");
+
+  setTimeout(function () {
+    result.classList.remove("set");
+  }, 150);
 }
